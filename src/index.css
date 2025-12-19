@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  /* Deep Midnight Background */
+  background-color: #020617; /* Slate 950 */
+  color: #e2e8f0; /* Slate 200 */
+  overflow-x: hidden;
+  /* Subtle mesh gradient for depth */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 25%), 
+    radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 25%);
+}
+
+/* Scrollbar Premium */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* --- PROFESSIONAL UTILITIES --- */
+
+/* Kartu dengan border halus (Executive Style) */
+.card-pro {
+  background: #0f172a; /* Slate 900 */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Input yang lebih matte dan solid */
+.input-pro {
+  background: #1e293b; /* Slate 800 */
+  border: 1px solid #334155; /* Slate 700 */
+  color: white;
+  transition: all 0.2s ease;
+}
+.input-pro:focus {
+  border-color: #6366f1; /* Indigo 500 */
+  background: #0f172a;
+  outline: none;
+  box-shadow: 0 0 0 1px #6366f1;
+}
+
+/* Gradient Text for Headlines */
+.text-gradient-gold {
+  background: linear-gradient(to right, #fbbf24, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
