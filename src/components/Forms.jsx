@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Save, Check, Layers, TrendingUp, Calendar } from 'lucide-react';
 
 const InputField = ({ label, type = "text", value, onChange, placeholder, autoFocus }) => (
@@ -33,18 +33,17 @@ const INCOME_CATS = [
 ];
 
 // --- 1. TRANSAKSI ---
-export const TransactionForm = ({ onSave, initialData, onClose }) => {
-  const [amount, setAmount] = useState('');
-  const [type, setType] = useState('expense');
-  const [selectedCat, setSelectedCat] = useState('');
-
-  useEffect(() => {
-    if (initialData) {
-      setAmount(initialData.amount);
-      setType(initialData.type);
-      setSelectedCat(initialData.category);
-    }
-  }, [initialData]);
+export const TransactionForm = ({ onSave, initialData }) => {
+  // FIX: Hapus useEffect. Inisialisasi state langsung saat komponen dibuat.
+  const [amount, setAmount] = useState(initialData?.amount || '');
+  const [type, setType] = useState(initialData?.type || 'expense');
+  
+  // Logic inisialisasi kategori (Lazy State Initialization)
+  const [selectedCat, setSelectedCat] = useState(() => {
+    if (!initialData) return '';
+    // Cek apakah kategori ada di list standar, jika tidak biarkan string aslinya
+    return initialData.category;
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,7 +78,7 @@ export const TransactionForm = ({ onSave, initialData, onClose }) => {
   );
 };
 
-// --- 2. BILLS (NEW) ---
+// --- 2. BILLS ---
 export const BillForm = ({ onSave }) => {
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
@@ -137,11 +136,14 @@ export const GoalForm = ({ onSave }) => {
 
 // --- 5. INVESTASI ---
 export const InvestmentForm = ({ onSave, initialData }) => {
+  // FIX: Hapus useEffect. Inisialisasi state langsung dari props.
   const [name, setName] = useState(initialData?.name || '');
   const [initialAmount, setInitialAmount] = useState(initialData?.initialAmount || '');
   const [roi, setRoi] = useState(initialData?.roi || '');
   const [type, setType] = useState(initialData?.type || 'stock');
+
   const handleSubmit = (e) => { e.preventDefault(); onSave({ name, initialAmount: parseFloat(initialAmount), roi: parseFloat(roi || 0), type }); };
+  
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="flex gap-2">
